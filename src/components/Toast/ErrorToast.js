@@ -1,4 +1,3 @@
-import React from 'react';
 import { ToastContainer, Toast } from 'react-bootstrap';
 import { useContext } from 'react'
 import { AppContext } from "../../App"

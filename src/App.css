@@ -23904,7 +23904,7 @@ header {
 }
 
 .header__timer {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #fff;
 }
 
@@ -23945,23 +23945,27 @@ header {
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-flex: 2;
-      -ms-flex: 2;
-          flex: 2;
-  overflow: hidden;
+      -ms-flex: 2 1 auto;
+          flex: 2 1 auto;
 }
 
 .board {
   width: 85%;
+  max-width: 350px;
+  height: auto;
+  min-height: 150px;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: (1fr)[6];
       grid-template-rows: repeat(6, 1fr);
   grid-gap: 5px;
-  padding: 0.7em;
+  padding: 4em 0.7em 1em;
+  overflow: hidden;
 }
 
 .board__row {
   width: 100%;
+  height: auto;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[5];
@@ -23982,7 +23986,7 @@ header {
 }
 
 .board__tile {
-  width: 100%;
+  max-width: 100%;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -23996,6 +24000,8 @@ header {
   line-height: 2rem;
   font-weight: bold;
   vertical-align: middle;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   text-transform: uppercase;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -24003,6 +24009,14 @@ header {
           user-select: none;
   color: #fff;
   border: 1px solid #475569;
+  /* Smaller on small screens */
+}
+
+@media (max-height: 400px) {
+  .board__tile {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+  }
 }
 
 .board__tile::before {
@@ -24066,7 +24080,7 @@ header {
       -ms-flex: 1;
           flex: 1;
   margin: 0 0.2em 0 0;
-  height: 58px;
+  height: 55px;
   background-color: #b1b1b1;
   color: #fff;
   font-size: 0.9rem;
@@ -24093,12 +24107,6 @@ header {
   -webkit-box-flex: 1.5;
       -ms-flex: 1.5;
           flex: 1.5;
-}
-
-@media (min-width: 426px) {
-  #keyboard {
-    padding: 1em 0.5em;
-  }
 }
 
 /***** SHARE MODAL *****/
@@ -24153,6 +24161,10 @@ div.modal-body button.btn svg {
   .board {
     width: 70%;
   }
+  /** KEYBOARD **/
+  #keyboard {
+    padding: 1em 0.5em;
+  }
   /** SHARE MODAL **/
   div.modal-body button.btn {
     padding: 0.6em 1.6em;
@@ -24162,8 +24174,11 @@ div.modal-body button.btn svg {
 
 /** For Desktop **/
 @media (min-width: 769px) {
+  header {
+    padding: 0.5em 4em;
+  }
   .header__timer {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
   .header__title {
     font-size: 3rem;

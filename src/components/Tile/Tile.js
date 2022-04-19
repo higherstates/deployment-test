@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react"
-import { AppContext } from "../App"
+import { AppContext } from "../../App"
 
 const Tile = ({ letterPosition, attemptValue }) => {
   const { board, correctWord, currentAttempt, setDisabledKey, setPresentKey, setCorrectKey } = useContext(AppContext)

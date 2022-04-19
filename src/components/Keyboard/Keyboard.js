@@ -1,5 +1,4 @@
 import { useEffect, useCallback } from 'react'
-// import './Keyboard.scss'
 import Key from '../Key/Key'
 import { useContext } from 'react'
 import { AppContext } from "../../App"

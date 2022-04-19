@@ -18,8 +18,7 @@ const Key = ({ keyVal, disabled, correct, present }) => {
   return (
     <button 
       className={ keyVal === 'backspace' || keyVal === 'enter' ? "flex-one-half" : ""}
-      tabIndex="0"
-      
+      tabIndex="-1"
       id={
         disabled ? "absent" 
         : correct ? "correct"

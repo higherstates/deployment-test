@@ -10,6 +10,7 @@ export const AppContext = createContext()
 function App() {
 
   const [errorToast, setErrorToast] = useState(false)
+  const [copyToast, setCopyToast] = useState(false)
   const [fiveLetters, setFiveLetters] = useState(false)
   const [wordCheck, setWordCheck] = useState(false)
 
@@ -26,8 +27,6 @@ function App() {
   const [gameOver, setGameOver] = useState(boardData ? boardData.status : { gameOver: false, guessedWord: false })
   const [correctWord, setCorrectWord] = useState(boardData ? boardData.solution : "")
 
-  // loop through each row, check if it's the correct word, if same green emoji
-  
 
   // RESET GAME AFTER 10MINS:
   const TEN_MINUTES = 600
@@ -119,6 +118,9 @@ function App() {
 
     // If game over, don't do anything:
     if (gameOver.gameOver) return
+
+   
+
     
     // Got the correct word, display share pop-up:
     if (currentWord === correctWord) {
@@ -145,10 +147,10 @@ function App() {
         "status": { gameOver: true, guessedWord: false }
       }
       localStorage.setItem("board-data", JSON.stringify(newBoardData));
+
+      setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPosition: 0})
       setGameOver({ gameOver: true, guessedWord: false })
       setShowModal(true)
-      console.log("End game, you lose")
-      setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPosition: 0})
       return
     }
 
@@ -163,26 +165,22 @@ function App() {
 
       setFiveLetters(true)
       setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPosition: 0})
-      console.log("Keep trying")
     } else if (currentAttempt.letterPosition === 5 && !words.includes(currentWord.toLowerCase()) ) {
       // Display error toast if word is invalid:
       setFiveLetters(true)
       setWordCheck(false)
       setErrorToast(true)
-      console.log("Weird word")
     } else {
-      // If less than 5 letters, display error toast:
+      // Display error toast if less than 5 letters:
       setFiveLetters(false)
       setErrorToast(true)
-      console.log("Less than 5 letters")
     }
-
   }
       
   return (
     <div className="App">
       <AppContext.Provider 
-        value={{ board, setBoard, currentAttempt, setCurrentAttempt, onSelect, onDelete, onSubmit, correctWord, errorToast, setErrorToast, fiveLetters, wordCheck, disabledKey, setDisabledKey, presentKey, setPresentKey, correctKey, setCorrectKey, gameOver, setGameOver, showModal, setShowModal, counter, setCounter, seconds, minutes, boardData }}
+        value={{ board, setBoard, currentAttempt, setCurrentAttempt, onSelect, onDelete, onSubmit, correctWord, errorToast, setErrorToast, fiveLetters, wordCheck, disabledKey, setDisabledKey, presentKey, setPresentKey, correctKey, setCorrectKey, gameOver, setGameOver, showModal, setShowModal, counter, setCounter, seconds, minutes, boardData, copyToast, setCopyToast }}
       >
         <Header />
         <Game />

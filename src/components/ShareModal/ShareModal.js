@@ -1,12 +1,11 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { AppContext } from '../../App'
 import { Modal, Button } from 'react-bootstrap'
 import { AiOutlineShareAlt, AiOutlineClose } from 'react-icons/ai'
 
 const ShareModal = () => {
-  const { correctWord, gameOver, showModal, setShowModal, currentAttempt } = useContext(AppContext)
+  const { gameOver, showModal, setShowModal, currentAttempt, copyToast, setCopyToast } = useContext(AppContext)
 
-  
   const getTime = () => {
     const today = new Date()
     const date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate()
@@ -14,32 +13,13 @@ const ShareModal = () => {
     return `${date} ${time}`
   }
 
-  const copy = async () => {
-    // The attempt count must be left:
+  const copyResult = async () => {
     let shareEmoji = ""
     let shareText = `Wordle ${getTime()} ${!gameOver.guessedWord ? "X" : currentAttempt.attempt}/6 \n ${shareEmoji}`
-    console.log(shareEmoji)
-
-    const bst = JSON.parse(localStorage.getItem('board-data')).boardState
-    bst.map((row) => {
-      const correctWordArr = correctWord.split('')
-      console.log(row, correctWordArr)
-      if (row === correctWordArr) {
-        return shareEmoji += "🟩"
-
-      }
-      row.forEach((letter) => {
-  
-      })
-    })
-
-
 
     await navigator.clipboard.writeText(shareText)
-    alert('Result copied')
+    setCopyToast(true)
   }
-
-
 
   return (
     <Modal
@@ -50,14 +30,14 @@ const ShareModal = () => {
       centered
     >
       <Modal.Header>
-        <Modal.Title>Game Over</Modal.Title>
+        <Modal.Title>{gameOver.guessedWord ? "You Win!" : "Game Over"}</Modal.Title>
       </Modal.Header>
         <Modal.Body>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             CLOSE
             <AiOutlineClose />
           </Button>
-          <Button onClick={copy} variant="primary">
+          <Button onClick={copyResult} variant="primary">
             SHARE
             <AiOutlineShareAlt />
           </Button>

@@ -24,7 +24,6 @@ html, body {
 }
 
 
-
 /***** HEADER *****/
 header {
   border-bottom: 2px solid $white;
@@ -34,11 +33,10 @@ header {
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   padding: 0.5em 2em;
-
 }
 
 .header__timer {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: $white;
 }
 
@@ -70,9 +68,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  // flex-grow: 1;
   flex: 2 1 auto;
-  // overflow: hidden;
 }
 
 .board {
@@ -85,8 +81,6 @@ header {
   grid-gap: 5px;
   padding: 4em 0.7em 1em;
   overflow: hidden;
-  // flex: 0.5;
-
 }
 
 .board__row {
@@ -125,10 +119,10 @@ header {
   color: $white;
   border: 1px solid $gray-box;
 
- /* Allow tiles to be smaller on small screens */
+ /* Smaller on small screens */
  @media (max-height: 400px) {
-    font-size: 1.5rem;
-    line-height: 1.5rem;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
 }
 
   &::before {
@@ -137,7 +131,6 @@ header {
     padding-bottom: 100%;
   }
 }
-
 
 
 /***** KEYBOARD *****/
@@ -233,6 +226,11 @@ div.modal-body {
 /** For Tablet **/
 @media (min-width: 426px) {
   /** HEADER **/
+
+  .header__timer {
+    // font-size: 1.5rem;
+  }
+
   .header__title {
     font-size: 2.3rem;
   }
@@ -261,9 +259,12 @@ div.modal-body {
 
 /** For Desktop **/
 @media (min-width: 769px) {
+  header {
+    padding: 0.5em 4em;
+  }
+
   .header__timer {
-    font-size: 1rem;
-    
+    font-size: 1.3rem;
   }
 
   .header__title {
